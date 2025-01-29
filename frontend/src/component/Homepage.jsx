@@ -63,33 +63,148 @@ const Homepage = () => {
 
   return (
     <>
-      <div className="container">
-        <h1 className="my-5 mx-6">Your Favourite Collection is here...</h1>
+<div className='container' style={{minHeight:"100vh"}}>
 
-        {products.length > 0 ? (
-          <div className="row my-4 mx-4 py-3 px-3">
-            {products.map((product) => (
-              <div className="col-md-4" key={product._id}>
-                <div className="card" style={{ width: "18rem" }}>
-                  <img src={product.image} style={{ height: "300px", width: "287px" }} alt={product.name} className="card-img-top" />
-                  <div className="card-body">
-                    <h4 className="card-title">{product.name}</h4>
-                    <h5 className="card-text">${product.price}</h5>
-                    <button type="button" className="btn btn-primary my-2 mx-2" data-bs-toggle="modal" data-bs-target="#editModal" onClick={() => handleEditClick(product)}>
-                      Edit
-                    </button>
-                    <button type="button" onClick={() => handleDeleteProduct(product._id)} className="btn btn-danger my-2 mx-2">
-                      Delete
-                    </button>
-                  </div>
-                </div>
+<div className="container pt-5" style={{ minHeight: "100vh" }}>
+  <h1 className="mb-4 text-center text-danger " >Current Products</h1>
+
+  {products.length > 0 ? (
+    <div className="row row-cols-1 row-cols-md-3 g-4">
+      {products.map((product) => (
+        <div className="col" key={product._id}>
+          <div className="card shadow-lg rounded overflow-hidden" style={{ maxHeight: "450px" }}>
+            <img
+              src={product.image}
+              className="card-img-top"
+              alt={product.name}
+              style={{ height: "250px", objectFit: "cover" }}
+            />
+            <div className="card-body">
+              <h4 className="card-title">{product.name}</h4>
+              <h5 className="card-text text-primary">${product.price}</h5>
+              <div className="d-flex justify-content-between">
+                <button
+                  type="button"
+                  className="btn btn-outline-primary btn-sm"
+                  data-bs-toggle="modal"
+                  data-bs-target="#editModal"
+                  onClick={() => handleEditClick(product)}
+                >
+                  Edit
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handleDeleteProduct(product._id)}
+                  className="btn btn-outline-danger btn-sm"
+                  >
+                  Delete
+                </button>
               </div>
-            ))}
+            </div>
           </div>
-        ) : (
-          <p>No products available.</p>
-        )}
-      </div>
+        </div>
+      ))}
+    </div>
+  ) : (
+    <p className="text-center">No products available.</p>
+  )}
+  </div>
+</div>
+
+
+
+
+{/* <div className="container mt-5">
+  <h1 className="mb-4 text-center text-danger">Current Products</h1>
+
+  {products.length > 0 ? (
+    <div className="row row-cols-1 row-cols-md-3 g-4">
+      {products.map((product) => (
+        <div className="col" key={product._id}>
+          <div className="card shadow-lg rounded overflow-hidden" style={{ maxHeight: "450px" }}>
+            <img
+              src={product.image}
+              className="card-img-top"
+              alt={product.name}
+              style={{ height: "250px", objectFit: "cover" }}
+            />
+            <div className="card-body">
+              <h4 className="card-title">{product.name}</h4>
+              <h5 className="card-text text-primary">${product.price}</h5>
+              <div className="d-flex justify-content-between">
+                <button
+                  type="button"
+                  className="btn btn-outline-primary btn-sm"
+                  data-bs-toggle="modal"
+                  data-bs-target="#editModal"
+                  onClick={() => handleEditClick(product)}
+                >
+                  Edit
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handleDeleteProduct(product._id)}
+                  className="btn btn-outline-danger btn-sm"
+                >
+                  Delete
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  ) : (
+    <p className="text-center">No products available.</p>
+  )}
+</div> */}
+
+
+      {/* <div className="container">
+  <h1 className="my-5 text-center text-danger">Current Products</h1>
+
+  {products.length > 0 ? (
+    <div className="row my-4">
+      {products.map((product) => (
+        <div className="col-md-4 mb-4" key={product._id}>
+          <div className="card shadow-sm rounded-lg">
+            <img
+              src={product.image}
+              className="card-img-top rounded-top"
+              alt={product.name}
+              style={{ height: "250px", objectFit: "cover" }}
+            />
+            <div className="card-body">
+              <h4 className="card-title">{product.name}</h4>
+              <h5 className="card-text text-primary">${product.price}</h5>
+              <div className="d-flex justify-content-between">
+                <button
+                  type="button"
+                  className="btn btn-outline-primary"
+                  data-bs-toggle="modal"
+                  data-bs-target="#editModal"
+                  onClick={() => handleEditClick(product)}
+                >
+                  Edit
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handleDeleteProduct(product._id)}
+                  className="btn btn-outline-danger"
+                >
+                  Delete
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  ) : (
+    <p className="text-center">No products available.</p>
+  )}
+</div> */}
+
 
       {/* Edit Product Modal */}
       <div className="modal fade" id="editModal" tabIndex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
