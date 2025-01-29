@@ -7,21 +7,26 @@ import productRoutes from "./routes/product.route.js";
 dotenv.config();
 const app = express();
 
-app.use(express.json()); // Allow parsing JSON data
+// Middleware to parse incoming JSON data
+app.use(express.json());
 connectDB();
 
 const __dirname = path.resolve(); // Fix __dirname
 
+// API Routes
 app.use("/api/products", productRoutes);
 
-// **Serve frontend in production mode**
+// ** Serve frontend in production mode **
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "/frontend/dist")));
+  // Serve static assets from /frontend/dist in production
+  app.use(express.static(path.join(__dirname, "frontend", "dist")));
 
+  // Catch-all route to serve the index.html
   app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "/frontend/dist/index.html"));
+    res.sendFile(path.join(__dirname, "frontend", "dist", "index.html"));
   });
 } else {
+  // If not production, return a message on root URL
   app.get("/", (req, res) => {
     res.send("API is running...");
   });
@@ -29,6 +34,47 @@ if (process.env.NODE_ENV === "production") {
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
+
+
+
+
+
+
+
+
+// perfect
+// import express from "express";
+// import path from "path";
+// import dotenv from "dotenv";
+// import { connectDB } from "./config/db.js";
+// import productRoutes from "./routes/product.route.js";
+
+// dotenv.config();
+// const app = express();
+
+// app.use(express.json()); // Allow parsing JSON data
+// connectDB();
+
+// const __dirname = path.resolve(); // Fix __dirname
+
+// app.use("/api/products", productRoutes);
+
+// // **Serve frontend in production mode**
+// if (process.env.NODE_ENV === "production") {
+//   app.use(express.static(path.join(__dirname, "/frontend/dist")));
+
+//   app.get("*", (req, res) => {
+//     res.sendFile(path.join(__dirname, "/frontend/dist/index.html"));
+//   });
+// } else {
+//   app.get("/", (req, res) => {
+//     res.send("API is running...");
+//   });
+// }
+
+// const PORT = process.env.PORT || 5000;
+// app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
 
 
